@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Camp Your Way</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+    </head>
+    <body>
+    
+        <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">CAMPYOWAY</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+     <ul class="navbar-nav ml-auto">
+          <% if (!currentUser) { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/login" data-target="#myModal" data-toggle="modal">Log In</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/register" data-target="#myModal" data-toggle="modal">Sign Up</a>
+            </li>
+          <% } else { %>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-target="#myModal" data-toggle="modal">Signed in as <%= currentUser.username %></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout" data-target="#myModal" data-toggle="modal">Log Out</a>
+            </li>
+          <% } %>
+      </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <% if(error && error.length>0){ %>
+    <div class="alert alert-danger" role="alert">
+      <%= error %>
+    </div>
+  <% } else if(success && success.length>0) { %>
+    <div class="alert alert-success" role="alert">
+      <%= success %>
+    </div>
+  <% } %>
+</div>
+
+        

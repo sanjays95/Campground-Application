@@ -1,0 +1,18 @@
+<% include ../partials/header.ejs %>
+
+<h1><%= camp.name %></h1>
+
+<img src="<%= camp.image %>"></img>
+
+<p><%= camp.description %></p>
+
+<% camp.comments.forEach(function(commentData){ %>
+	<li>
+		<%= commentData.text %> - <strong><%= commentData.author %></strong>  
+	</li>
+<% }) %>
+<p>
+	<a class="btn btn-success"> href="<%= camp._id %>/comments/new">Add a comment</a>
+</p>
+
+<% include ../partials/footer.ejs %>

@@ -1,0 +1,15 @@
+<% include partials/header.ejs %>
+
+<h1><%= camp.name %></h1>
+
+<img src="<%= camp.image %>"></img>
+
+<p><%= camp.description %></p>
+
+<% camp.comments.forEach(function(commentData){ %>
+	<li>
+		<%= commentData.text %> - <strong><%= commentData.author %></strong>  
+	</li>
+<% }) %>
+
+<% include partials/footer.ejs %>

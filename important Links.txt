@@ -1,0 +1,11 @@
+Flash Messages : https://www.udemy.com/the-web-developer-bootcamp/learn/v4/questions/1983196
+
+Admin in Yelpcamp : https://www.youtube.com/watch?v=somc45pnM2k
+
+
+req.user is created by passport when a user is logged in, it's available in all of the routes when a user is logged in, otherwise it's undefined.
+
+Yelpcamp -Refactoring
+https://www.udemy.com/the-web-developer-bootcamp/learn/v4/questions/2078848
+
+Password Reset : https://www.youtube.com/watch?v=UV9FvlTySGg&feature=youtu.be

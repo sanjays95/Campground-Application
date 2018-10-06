@@ -1,0 +1,31 @@
+<% include ../partials/header.ejs %>
+
+<div class='container'>
+    <header class='jumbotron'>
+        <h1>Welcome to Campground Arena</h1>   
+        <p>
+            List of all camps around the world.
+            <p>
+                <a class='btn btn-primary brn-lg' href="/camps/new">Add a new camp</a>
+            </p>
+        </p>
+    </header>
+    
+    <div class='row'>
+        <% for(var i=0 ; i<campLists.length ; i++){ %>
+            <div class='col-md-3 col-sm-6'>
+                <div class='img-thumbnail'>
+                    <img src = "<%= campLists[i].image %>" ></img> 
+                    <div class='caption'>
+                        <h6 style='text-align :center;'><%= campLists[i].name %></h3>
+                    </div>
+                    <p class='text-center'>
+                        <a href="camps/<%=campLists[i]._id %>" class="btn btn-primary">More Info</a>
+                    </p>
+                </div>    
+            </div>
+        <% } %>
+    </div>
+</div>
+
+<% include ../partials/footer.ejs %>

@@ -1,0 +1,100 @@
+<% include ../partials/header.ejs %>
+
+<div class="container">	
+		<div class='row'>
+				<div class="col-md-3">	
+						<p class="lead">CampYoWay</p>
+						<ul class="list-group">	
+								<li class="list-group-item active">Info 1</li>
+		  						<li class="list-group-item">Info 2</li>
+		  						<li class="list-group-item">Info 3</li>
+						</ul>
+				<div id="map"></div>		
+				</div>
+				
+				<div class="col-md-9">
+					<div class="img-thumbnail">
+						<figure class="figure">
+							<img src="<%= camp.image %>" class="figure-img img-fluid rounded"></img>
+							<figcaption class="figure-caption">
+								<h5 class="float-right">$<%= camp.price %>/night</h5>
+								<h4><a href="#"><%= camp.name %></a></h4>
+								<p><%= camp.description %></p>
+								<p>
+									<em>Submitted by <%= camp.author.username %>, <%= moment(camp.createdDate).fromNow() %> </em>
+								</p>
+								<% if(currentUser){ %>
+									<% if(camp.author.id.equals(currentUser._id) || currentUser.isAdmin){ %>
+									<a class="btn btn-warning" href="/camps/<%= camp._id %>/edit">Edit</a>
+									<form class="delete-form" action="/camps/<%= camp._id %>?_method=DELETE" method="POST">
+										<button class="btn btn-danger">Delete</button>
+									</form>
+								<% }} %>
+							</figcaption> 
+						</figure>						
+					</div>
+					<div class="card card-body bg-light">
+						<div class="card-body">
+							<form method="POST" action="/camps/<%= camp._id %>/comments" class="form-inline">
+								<div class="form-group" id="comment-form"> 
+									<textarea style="width:80%; margin-right: 10px;" class="form-control" rows="1" placeholder="Write a comment"  name="comment[text]"></textarea>	
+									<button class="btn btn-success btn-sm " type="submit">Add a comment</a>	
+								</div> 
+							</form>
+							<hr>							
+							<% camp.comments.forEach(function(commentData){ %>
+							<div class="row">
+								<div class="col-md-12">
+									<strong><%= commentData.author.username %></strong>
+									<span class="float-right"><%= moment(commentData.createDate).fromNow() %></span>
+									<p><%= commentData.text %></p>
+									<% if(currentUser) {%> 
+										<% if( commentData.author.id.equals(currentUser._id) || currentUser.isAdmin){ %>
+									<a class="btn btn-sm btn-warning" 
+									   href="/camps/<%= camp._id %>/comments/<%= commentData._id %>/edit">
+									   Edit
+									</a>
+									<form class="delete-form" method="POST" action="/camps/<%= camp._id %>/comments/<%= commentData._id %>?_method=DELETE">
+										<button type="submit" class="btn btn-danger btn-sm">Delete</button>
+									</form>
+									<% }} %>
+								</div>
+							</div>
+							<% }) %>
+						</div>
+					</div>
+				</div>
+		</div>		
+</div>
+
+<script>
+  function initMap() {
+    var lat = <%= camp.lat %>;
+    var lng = <%= camp.lng %>;
+    var center = {lat: lat, lng: lng };
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 8,
+        center: center,
+        scrollwheel: false
+    });
+    var contentString = `
+      <strong><%= camp.name %><br />
+      <%= camp.location %></strong>
+      <p><%= camp.description %></p>
+    `
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+    var marker = new google.maps.Marker({
+        position: center,
+        map: map
+    });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+  }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaXRkQOcme1_ypB1rO3oqxx9q_W3u_Jyg&callback=initMap"></script>	
+
+
+<% include ../partials/footer.ejs %>

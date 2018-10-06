@@ -1,0 +1,22 @@
+.img-thumbnail img {
+	width: 100%;
+}
+.container{
+	margin-top: 1em;
+}
+.img-thumbnail{
+	padding : 0;
+}
+.figure-caption{
+	padding: 9px;
+}
+.delete-form{
+	display:inline;
+}
+#comment-form{
+	width: 100%;
+}	
+
+textarea{
+	width: 100%;
+}
